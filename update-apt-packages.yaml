@@ -1,0 +1,14 @@
+---
+- name: APT Pakete auf Debian/Ubuntu Servern aktualisieren
+  hosts: all
+  become: true  # Führt die Befehle mit sudo-Rechten aus
+
+  tasks:
+    - name: Paket-Cache aktualisieren (apt update)
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Cache für eine Stunde als gültig ansehen
+
+    - name: Alle Pakete auf die neueste Version aktualisieren (apt upgrade)
+      ansible.builtin.apt:
+        upgrade: yes
